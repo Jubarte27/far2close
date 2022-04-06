@@ -92,7 +92,7 @@ public class VantagePoint<T extends Point<T>> implements MetricDistanceSearchTre
 
         if (distance > node.radius) {
             search(node.outside, point, result);
-            if (node.radius + result.maxDist > distance) {
+            if (node.radius + result.maxDist >= distance) {
                 search(node.inside, point, result);
             }
         } else {

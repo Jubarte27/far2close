@@ -15,22 +15,21 @@ public class Main {
 
     public static void main(String[] args) {
         double start = getSec();
-        int testingIterations = 30;
-        int vCount = 100000;
+        int testingIterations = 300;
+        int vCount = 1000;
         int vantagePoints = 2000;
         int dimensions = 3;
 
-        Tester<Coordinate> tester = new Tester<>((amount) -> Coordinate.randomCoordinates(amount, dimensions));
-//        Tester<StringPoint> tester = new Tester<>(StringPoint::randomPoints);
-        tester.addTreeSupplier(LinearSearch::new);
-        tester.addTreeSupplier(Far2CloseTreeNNSimpleBinary::new);
-        tester.addTreeSupplier(Far2CloseTreeNN::new);
+//        Tester<Coordinate> tester = new Tester<>((amount) -> Coordinate.randomCoordinates(amount, dimensions));
+        Tester<StringPoint> tester = new Tester<>(StringPoint::randomPoints);
+//        tester.addTreeSupplier(Far2CloseTreeNNSimpleBinary::new);
+//        tester.addTreeSupplier(Far2CloseTreeNN::new);
         tester.addTreeSupplier(VantagePoint::new);
 //        tester.addTreeSupplier(() -> new VpTree_a<>(vantagePoints, vCount));
 //        tester.addTreeSupplier(() -> new VpTree_b<>(vantagePoints, vCount));
 //        tester.addTreeSupplier(() -> new MultiVpTree_a<>(vantagePoints, vCount));
 //        tester.addTreeSupplier(() -> new MultiVpTree_b<>(vantagePoints, vCount));
-        tester.test(testingIterations, vCount, () -> new TopKResult(1));
+        tester.test(testingIterations, vCount, () -> new RangeQueryResult(2));
 
         System.out.println("Total: " + df.format((getSec() - start)));
     }
