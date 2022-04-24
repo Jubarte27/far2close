@@ -10,6 +10,7 @@ public abstract class Result {
 
     protected int curSize = 0;
     public double maxDist = Integer.MAX_VALUE;
+    public int distanceFunctionCalls = 0;
 
 
     public int length() {

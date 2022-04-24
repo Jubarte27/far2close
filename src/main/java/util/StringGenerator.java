@@ -33,4 +33,8 @@ public class StringGenerator {
         }
         return result;
     }
+
+    public ArrayList<String> all() {
+        return possibleStrings;
+    }
 }

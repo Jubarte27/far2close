@@ -63,7 +63,7 @@ public class StringPoint implements Point<StringPoint> {
 
     static {
         try {
-            stringGenerator = new StringGenerator("/engmix.txt");
+            stringGenerator = new StringGenerator("/paperER_data");
         } catch (IOException e) {
             e.printStackTrace();
             stringGenerator = null;
@@ -72,5 +72,9 @@ public class StringPoint implements Point<StringPoint> {
 
     public static ArrayList<StringPoint> randomPoints(int amount) {
         return stringGenerator.random(amount).stream().map(StringPoint::new).collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    public static ArrayList<StringPoint> allPoints() {
+        return stringGenerator.all().stream().map(StringPoint::new).collect(Collectors.toCollection(ArrayList::new));
     }
 }

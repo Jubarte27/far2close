@@ -191,6 +191,7 @@ public class Far2CloseTreeNNSimpleBinary<T extends Point<T>> implements MetricDi
         protected void search(T p, Result result) {
 
             double d = point.distance(p);
+            result.distanceFunctionCalls++;
 
             result.addWord(point, d);
 
