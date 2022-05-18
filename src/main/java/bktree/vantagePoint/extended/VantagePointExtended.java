@@ -7,19 +7,17 @@ import bktree.result.Result;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class VantagePointExtended<T extends Point<T>> implements MetricDistanceSearchTree<T> {
     Node root;
     public float threshold;
 
-    public VantagePointExtended(ArrayList<T> points) {
-        addNodes(points);
+    public VantagePointExtended(float threshold) {
+        this.threshold = threshold;
     }
 
     public VantagePointExtended() {
-        Random random = new Random();
-        threshold = random.nextFloat();
+        threshold = 0.1f;
     }
 
     private void insertPoints(Node subTree, List<T> points) {

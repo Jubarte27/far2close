@@ -1,6 +1,8 @@
 package main;
 
+import bktree.far2close.Far2CloseTreeNN;
 import bktree.far2close.Far2CloseTreeNNSimpleBinary;
+import bktree.point.Coordinate;
 import bktree.point.StringPoint;
 import bktree.result.ClosestResult;
 import bktree.vantagePoint.*;
@@ -19,16 +21,21 @@ public class Main {
     }
     public static void main(String[] args) {
         double start = getSec();
-        int testingIterations = 300;
+        int testingIterations = 30;
         int vCount = 10000;
-        int vantagePoints = 2000;
+//        int vantagePoints = 2000;
         int dimensions = 3;
 
-//        tester.Tester<Coordinate> tester = new tester.Tester<>((amount) -> Coordinate.randomCoordinates(amount, dimensions));
+//        Tester<Coordinate> tester = new Tester<>((amount) -> Coordinate.randomCoordinates(amount, dimensions));
         Tester<StringPoint> tester = new Tester<>(StringPoint::randomPoints);
 //        tester.addTreeSupplier(Far2CloseTreeNNSimpleBinary::new);
-//        tester.addTreeSupplier(VantagePoint::new);
-        tester.addTreeSupplier(VantagePointExtended::new);
+        tester.addTreeSupplier(Far2CloseTreeNN::new);
+        tester.addTreeSupplier(VantagePoint::new);
+//        tester.addTreeSupplier(() -> new VantagePointExtended<>(0.01f));
+//        tester.addTreeSupplier(() -> new VantagePointExtended<>(0.1f));
+        tester.addTreeSupplier(() -> new VantagePointExtended<>(0.25f));
+//        tester.addTreeSupplier(() -> new VantagePointExtended<>(0.5f));
+//        tester.addTreeSupplier(() -> new VantagePointExtended<>(0.75f));
 //        tester.addTreeSupplier(() -> new VpTree_a<>(vantagePoints, vCount));
 //        tester.addTreeSupplier(() -> new VpTree_b<>(vantagePoints, vCount));
 //        tester.addTreeSupplier(() -> new MultiVpTree_a<>(vantagePoints, vCount));
@@ -46,7 +53,7 @@ public class Main {
 //        tester.testUniqueTree(StringPoint.allPoints(), StringPoint.randomPoints(testingIterations), () -> new TopKResult(5));
 
         System.out.println("Total: " + df.format((getSec() - start)));
-        tester.scatter();
+//        tester.scatter();
     }
 
     public static double getSec() {

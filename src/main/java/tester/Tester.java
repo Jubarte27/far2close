@@ -4,8 +4,6 @@ import bktree.MetricDistanceSearchTree;
 import bktree.linearSearch.LinearSearch;
 import bktree.point.Point;
 import bktree.result.Result;
-import bktree.vantagePoint.extended.VantagePointExtended;
-import com.github.sh0nk.matplotlib4j.NumpyUtils;
 import com.github.sh0nk.matplotlib4j.Plot;
 import com.github.sh0nk.matplotlib4j.PythonConfig;
 import com.github.sh0nk.matplotlib4j.PythonExecutionException;
@@ -16,7 +14,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -50,23 +47,15 @@ public class Tester<T extends Point<T>> {
     }
 
     public void scatter() {
-        List<Double> x = searchResults
+        List<Integer> x = searchResults
                 .stream()
-                .filter(r -> VantagePointExtended.class.isAssignableFrom(r.tree().getClass()))
-                .map(SearchResults::searchTime)
-                .collect(Collectors.toList());
-
-        List<Double> y = searchResults
-                .stream()
-                .filter(r -> VantagePointExtended.class.isAssignableFrom(r.tree().getClass()))
-                .map(r -> (VantagePointExtended<?>) r.tree())
-                .map(tree -> (double) tree.threshold)
+                .map(s -> s.result().distanceFunctionCalls)
                 .collect(Collectors.toList());
 
         Plot plt = Plot.create(PythonConfig.pythonBinPathConfig("/home/itto/anaconda3/bin/python"));
-        plt.plot().add(x, y, "o").label("sin");
+        plt.hist().add(x).label("VantagePointExtended");
         plt.legend().loc("upper right");
-        plt.title("scatter");
+        plt.title("VantagePointExtended");
         try {
             plt.show();
         } catch (IOException | PythonExecutionException e) {
@@ -195,7 +184,7 @@ public class Tester<T extends Point<T>> {
         double start = Main.getSec();
         tree.addNodes(points);
         double elapsed = Main.getSec() - start;
-        insertionResults.add(new InsertionResults(elapsed, tree));
+//        insertionResults.add(new InsertionResults(elapsed, tree));
         return elapsed;
     }
 
@@ -223,7 +212,7 @@ public class Tester<T extends Point<T>> {
         double start = Main.getSec();
         tree.search(point, result);
         double elapsed = Main.getSec() - start;
-        searchResults.add(new SearchResults(elapsed, tree, result));
+//        searchResults.add(new SearchResults(elapsed, tree, result));
         return elapsed;
     }
 
