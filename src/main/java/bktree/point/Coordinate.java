@@ -1,8 +1,9 @@
 package bktree.point;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
+import osmreader.OsmReader;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.lang.Math.sqrt;
 
@@ -84,5 +85,28 @@ public class Coordinate implements Point<Coordinate> {
             points.add(randomCoordinate(dimensions));
         }
         return points;
+    }
+
+    public static ArrayList<Coordinate> schoolCoordinates() {
+        return allCoordinatesFromResource("/schools.osm.pbf");
+    }
+
+    public static ArrayList<Coordinate> universityCoordinates() {
+        return allCoordinatesFromResource("/universities.osm.pbf");
+    }
+
+    public static ArrayList<Coordinate> restaurantCoordinates() {
+        return allCoordinatesFromResource("/restaurants.osm.pbf");
+    }
+
+    public static ArrayList<Coordinate> maxCoordinates() {
+        return allCoordinatesFromResource("/south-america-latest.osm.pbf");
+    }
+
+    private static ArrayList<Coordinate> allCoordinatesFromResource(String resource) {
+        OsmReader reader = new OsmReader(resource);
+        ArrayList<Coordinate> allCoordinates = reader.filterAndConvert(Map.of(), osmNode -> new Coordinate(new double[] {osmNode.getLatitude(), osmNode.getLongitude()}), 1 << 19);
+        reader.close();
+        return allCoordinates;
     }
 }
