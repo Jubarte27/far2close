@@ -3,11 +3,8 @@ package bktree.point;
 import osmreader.OsmReader;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
-import static java.lang.Math.sqrt;
-
-public class Coordinate implements Point<Coordinate> {
+public class Coordinate implements MultiPoint<Double, Coordinate> {
     public final double[] axes;
     private double dist = 0;
 
@@ -15,37 +12,18 @@ public class Coordinate implements Point<Coordinate> {
         this.axes = axes.clone();
     }
 
-    public void print() {
-        for (double axis : axes) {
-            System.out.println(axis + " ");
-        }
+    @Override
+    public Double at(int i) {
+        return axes[i];
+    }
+
+    @Override
+    public int dimensions() {
+        return axes.length;
     }
 
     public double distanceInAxis(Coordinate p, int axis) {
         return this.axes[axis] - p.axes[axis];
-    }
-
-    public double distanceInAxisSquared(Coordinate p, int axis) {
-        double distanceInAxis = distanceInAxis(p, axis);
-        return distanceInAxis * distanceInAxis;
-    }
-
-    public double distanceSquared(Coordinate p) {
-        double distanceSquared = 0;
-        for (int i = 0; i < axes.length; i++) {
-            distanceSquared += distanceInAxisSquared(p, i);
-        }
-        return distanceSquared;
-    }
-
-    @Override
-    public double distance(Coordinate p) {
-        return sqrt(distanceSquared(p));
-    }
-
-    @Override
-    public double optimizedDistance(Coordinate p) {
-        return distanceSquared(p);
     }
 
     @Override
@@ -74,7 +52,7 @@ public class Coordinate implements Point<Coordinate> {
         double[] axes = new double[dimensions];
         Random r = new Random();
         for (int i = 0; i < dimensions; i++) {
-            axes[i] = r.nextDouble(-100000, 100000);
+            axes[i] = r.nextDouble(-100, 100);
         }
         return new Coordinate(axes);
     }

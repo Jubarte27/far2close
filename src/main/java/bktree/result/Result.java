@@ -9,7 +9,7 @@ public abstract class Result {
     protected Word last;
 
     protected int curSize = 0;
-    public double maxDist = Integer.MAX_VALUE;
+    public double maxDist = Double.POSITIVE_INFINITY;
     public int distanceFunctionCalls = 0;
 
 
