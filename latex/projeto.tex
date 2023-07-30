@@ -1,0 +1,354 @@
+\documentclass[a4paper,12pt,oneside]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{times}
+\usepackage[margin=3cm]{geometry}
+%\usepackage[margin=2cm,left=3cm]{geometry}
+\usepackage[english,brazilian]{babel} %french
+\usepackage{colortbl}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{pdfpages}
+%\usepackage{subcaption}
+\usepackage[hyperindex=true]{hyperref}
+\usepackage{xspace}
+\usepackage{qsymbols}
+\usepackage{soul}
+\usepackage[portuges]{varioref}
+%\usepackage[brazilian]{minitoc}
+%\usepackage[rubberchapters,clearempty,pagestyles]{titlesec}
+\usepackage{tabulary}
+\usepackage{tabularx}
+
+%\usepackage[round,sort,colon]{natbib}
+\usepackage[numbers,sort]{natbib}
+\let\cite\citep
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Título definido aqui
+\newcommand{\titulo}{Aprimoramento dos métodos de compressão probabilísticos PPM}
+\newcommand{\engtitle}{Enhacing PPM probability based compression methods}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Edital de submissão
+\newcommand{\edital}{nome do edital}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% linha do header
+\renewcommand{\headrulewidth}{0.0pt}
+% linha do footer
+\renewcommand{\footrulewidth}{0.0pt}
+
+\pagestyle{fancy}                       % Sets fancy header and footer
+\fancyhf{}
+%\fancyhead[C]{\footnotesize \edital \hfill João V. F. Lima}
+\fancyhead[LE,RO]{\footnotesize\thepage}
+%\fancyhead[RE]{\footnotesize \nouppercase{\leftmark}}
+%\fancyhead[LO]{\footnotesize \nouppercase{\rightmark}}
+%\fancyfoot[C]{\footnotesize \edital}
+
+\fancypagestyle{plain}{
+  \fancyhead{}
+  \fancyfoot{}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+%\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else%
+%  \hbox{}%
+%  \thispagestyle{empty}%              % Empty header styles
+%  \newpage%
+%  \if@twocolumn\hbox{}\newpage\fi\fi\fi}
+
+
+%\renewcommand*{\backref}[1]{}
+%\renewcommand*{\backrefalt}[4]{%
+%\ifcase #1 %
+%(Not cited.)%
+%\or
+%(Cited on page~#2.)%
+%\else
+%(Cited on pages~#2.)%
+%\fi}
+%\renewcommand*{\backrefsep}{, }
+%\renewcommand*{\backreftwosep}{ and~}
+%\renewcommand*{\backreflastsep}{ and~}
+
+%\let\cite\citep
+
+\newcommand{\memoinclui}[3]{
+  \newpage
+%  \subsection{#1}
+%  \includepdf[pages=-,frame=true,scale=.86,pagecommand={},noautoscale=false,offset={7mm -6mm}]{#2}
+  \includepdf[pages=1,frame=true,scale=.86,pagecommand=\subsection{#1}\label{#2},noautoscale=false,offset={7mm -6mm}]{#3}
+  \includepdf[pages=2-,frame=true,scale=.86,pagecommand={},noautoscale=false,offset={7mm -6mm}]{#3}
+}
+
+\newcommand{\memoincluipg}[3]{
+  \newpage
+  \includepdf[pages=1,frame=true,scale=.86,pagecommand=\subsection{#1}\label{#2},noautoscale=false,offset={7mm -6mm}]{#3}
+}
+
+\usepackage{color}
+\definecolor{linkcol}{rgb}{0,0,0.4} 
+\definecolor{citecol}{rgb}{0.5,0,0} 
+
+% Change this to change the informations included in the pdf file
+\hypersetup
+{
+  bookmarksopen=true,
+  pdftitle="\titulo",
+  pdfauthor="Sergio Luis Sardi Mergen", 
+  pdfsubject="\titulo", 
+  pdftoolbar=false, 
+  pdfmenubar=true,
+  pdfhighlight=/O,
+  pdfpagemode=UseNone,
+  pdfpagelayout=SinglePage,
+  pdffitwindow=true,
+  colorlinks=false,
+%  colorlinks=true,
+%  linkcolor=linkcol,
+%  citecolor=citecol,
+%  urlcolor=linkcol
+}
+
+\graphicspath{{.}{figuras/}}
+
+%\renewcommand\bibname{Referências bibliográficas}
+
+%\date{\today}
+%\date{Dezembro de 2014}
+
+\title{\titulo}
+
+\author{Sérgio Luís Sardi Mergen}
+
+% minitoc 
+%\setlength{\stcindent}{5pt}
+%\renewcommand{\stcSSfont}{\small}
+
+\begin{document}
+
+\begin{titlepage}
+
+\pagestyle{empty}
+\begin{center}
+\MakeUppercase{Universidade Federal de Santa Maria}\\
+\MakeUppercase{Centro de Tecnologia}\\
+%\MakeUppercase{Programa de Pós-Graduação em Informática}\\
+\vspace*{\fill}
+%\noindent \Large{Edital \edital} \\
+%\vspace{2cm}
+\vspace*{\fill}
+\noindent \Large{Projeto de Pesquisa Científica} \\
+\noindent \Large{Relatório Final} \\
+\vspace*{\fill}
+\noindent\Huge{\bf \titulo} \\
+%\vspace{2cm}
+\vspace*{\fill}
+\noindent \Large{Sérgio Luís Sardi Mergen} \\
+%\noindent \Large{Laboratório de Sistemas de Computação} \\
+%\vfill
+\vspace*{\fill}
+\normalsize{Março de 2015}
+\end{center}
+
+\end{titlepage}
+
+\pagestyle{fancy}
+
+%\setcounter{secnumdepth}{2}
+\tableofcontents            % 
+\newpage
+
+\input{macros}
+
+
+%Projeto de pesquisa, contendo: título; dados de identificação; objetivos;
+%metodologia; caracterização e relevância do tema, orçamento (Anexo I),
+%cronograma de execução e plano de atividades do bolsista (atendendo aos termos
+%e objetivos deste edital) e resultados esperados e impactos ambientais,
+%econômicos, sociais e/ou de inovação; 
+
+% 1 identificacao da proposta
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Identificação do projeto}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Título: {\bf \titulo}\\
+
+\begin{otherlanguage}{english}
+\noindent
+Título em inglês: {\bf \engtitle}\\
+\end{otherlanguage}
+
+\noindent
+Coordenador: Sérgio Luís Sardi Mergen\\
+
+\noindent
+Instituição executora: \ufsm \\
+
+%\noindent
+%Grupo de pesquisa/CNPq: Laboratório de Sistemas de Computação (LSC/UFSM)\\
+
+\noindent
+%Edital: --- \edital \\
+
+\noindent
+Início previsto: março de 2015 \\
+
+\noindent
+Duração: 24 meses \\
+
+\noindent
+Pesquisadores:
+\begin{itemize}
+\item Sérgio Luís Sardi Mergen, UFSM, Coordenador
+\item Vinicius Fulber Garcia, Colaborador
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Resumo}
+
+A compressão de dados é uma área que investiga o uso de algoritmos que são capazes de reduzir o número de bytes necessários para representar informações presentes em arquivos de dados. Diversos métodos de compressão foram propostos ao longo do tempo, como métodos puramente estatísticos (ex. Hufmann), os baseados em dicionário (ex. LZ77) e métodos probabilísticos (ex. PPM). Atualmente, os métodos usados comercialmente são baseados em dicionário. Seu uso decorre da boa taxa de compressão alcançada e do baixo tempo de processamento, tanto na compressão quanto na descompressão. Entretanto, os métodos PPM conseguem taxas de compressão melhores, ao custo de um maior tempo de processamento. Este projeto de pesquisa busca implementar o método PPM e testar variações desse método, seja pelo uso de estruturas de dados distintas ou pela adaptação na forma como a compressão é realizada. Entre os objetivos a serem alcançados está a busca de melhores tempo de resposta e maiores taxas de compressão, seja pela adaptação do método existente ou pela criação de um método novo.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2 qualificação do problema
+\section{Introdução}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+A compressão de dados é uma área que investiga o uso de algoritmos que são capazes de representar um arquivo de dados em um outro formato que ocupe menos espaço. Essa operação é chamada de compressão. Dado o arquivo comprimido, a operação inversa é resgatar o conteúdo original. Essa operação é chamada de descompressão. 
+
+Considerando que um arquivo é composto por símbolos, cabe a um compressor de dados reduzir o número de bits necessários para representar cada símbolo. O número de bits necessários para representar cada símbolo forma uma medida chamada de btc (bits per code). Quanto menor for, melhor é o método. Outra forma de mensurar a eficácia de um método de compressão é através da taxa de compressão. Nesse caso, quanto maior a taxa, melhor o algoritmo. 
+
+Quando um método de compressão consegue recuperar todo o conteúdo original de um arquivo comprimido, diz-se que ele é um método de compressão sem perda. Esse método é indicado quando não se pode perder nenhuma parte do arquivo original. Exemplos de arquivos em que toda informação é vital são arquivos de texto. 
+
+Quando um método de compressão não consegue recuperar todo o conteúdo original de um arquivo comprimido, diz-se que ele é um método de compressão com perda. Esse método é indicado quando é tolerável perder parte do conteúdo do arquivo original se isso garante maiores taxas de compressão. Exemplos de arquivos em que parte da informação pode ser perdida são arquivos gráficos, como jpeg, em que a resolução da imagem original é sacrificada para que o arquivo ocupe menos espaço. 
+
+Nesse projeto, o foco será em métodos de compressão sem perda, especialmente aqueles que permitem boas taxas de compressão para arquivos textuais. 
+
+Diversos métodos de compressão de texto foram propostos ao longo do tempo, como detalhado a seguir.
+
+\begin{description}
+
+\item[Métodos puramente estatísticos]
+São métodos que  usam menos bits para representar símbolos que aparecem com maior freqüência dentro do arquivo. Dois dos métodos mais conhecidos de codificação estatística (ou codificação por entropia) são o Hufmann~\cite{huffman1952method} e a codificação aritmética~\cite{witten1987arithmetic}. 
+
+\item[Métodos baseados em dicionário]
+São métodos que usam os caracteres já codificados do arquivo de entrada para codificar os caracteres que ainda estão por vir. Para isso, o método verifica se uma seqüência de caracteres a codificar já ocorreu no arquivo de entrada. Em caso afirmativo, é codificado um índice que remete à posição dessa seqüência identificada. Um dos métodos de compressão baseada em dicionário mais conhecido é o LZ77~\cite{ziv1977universal}. Variações desse método deram origem a padrões (DEFLATE~\cite{salomon2004data}) e a ferramentas de compressão populares nos dias de hoje (ex. zip).
+
+
+\item[Métodos probabilísticos]
+Esses métodos se caracterizam por codificar a probabilidade de ocorrência de um símbolo dado um contexto. O contexto compreende os últimos símbolos que apareceram no texto antes do símbolo a ser codificado. Um símbolo especial, chamado de escape, deve ser codificado quando o símbolo a ser lido tem probabilidade de ocorrência nula~\cite{moffat1990implementing}. A probabilidade é calculada usando algum método estatístico, como codificação de Hufmann ou codificação aritmética. 
+
+O conceito original deu origem a variações, e a classe de algoritmos que utiliza essa ideia passou a ser conhecida pela sigla PPM (Prediction by Partial Matching). Por exemplo, ~\citep{cleary1984data} descreve uma variação do algoritmo original que muda a probabilidade que representa o símbolo de escape.
+
+Os métodos PPM se destacam por conseguir  taxas de compressão melhores do que os métodos de dicionário, especialmente em arquivos contendo texto. No entanto, o tempo de resposta tanto para a compressão quanto descompressão são relativamente altos, o que torna esses métodos de pouco valor prático.
+
+\end{description}
+
+Esse projeto de pesquisa tem por objetivo propor melhorias nos métodos PPM de modo a reduzir o tempo de processamento, além de investigar a possibilidade de obter melhores taxas de compressão. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 4 metodologia a ser empregada
+\section{Metodologia}
+\label{sec:metodologia}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Para alcançar os objetivos delineados para o projeto, uma seqüência de etapas foi elaborada. A descrição de cada uma delas virá a seguir.
+
+
+\begin{description}
+
+
+	
+	\item[Estudar o estado da arte] 
+Nessa etapa serão coletados artigos e demais documentos escritos que explicam os métodos de compressão existentes. Será feito um estudo aprofundado utilizando esses documentos como forma de compreender as diferenças entre os métodos e como eles se complementam.
+
+  \item[Implementar  um método PPM]
+Nessa etapa será realizada uma implementação inicial de um método probabilístico que servirá como base para aprimoramentos. Uma possibilidade a ser estudada é o uso de biblioteca prontas que já implementam o método. Será utilizada a linguagem C, uma vez que a eficiência em tempo é um dos principais objetivos do projeto. 
+
+\item[Reduzir o tempo de resposta]
+Nessa etapa serão analisadas possibilidades de modificação no algoritmo para que a compressão seja realizada em um tempo reduzido. Aspectos a investigar incluem o uso de estruturas de dados e técnicas de otimização específicas para a linguagem C.  
+
+\item[Aumentar a taxa de compressão]
+Nessa etapa serão analisadas possibilidades de modificação no algoritmo para melhorar a taxa de compressão, ou seja, fazer com que sejam usados menos bits para representar cada símbolo do arquivo de entrada. Aspectos a investigar incluem mudanças na forma com que a probabilidade dos símbolos é calculada bem como mudanças no própria lógica de funcionamento dos métodos PPM. 
+
+\item[Realizar testes]
+A realização de testes servirá para comprovar se as modificações realizadas surtiram o efeito esperado. Nessa etapa será elaborado um framework de testes que possibilite uma rápida configuração de cenários de teste e avaliação dos resultados obtidos. Além disso, nessa etapa será investigada a existência de benchmarks de teste para algoritmos de compressão. 
+
+\item[Documentação]
+Nessa etapa os resultados do projeto são documentados na forma de arquivos do latex. Em momentos oportunos o texto pode ser usado para a escrita de artigos que relatem alguma contribuição científica alcançada.
+
+
+\end{description}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 7 cronograma de atividades
+\section{Cronograma de atividades}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+A Tabela~\vref{tab:cronograma} resume o cronograma de atividades baseado nas
+atividades propostas na seção~\ref{sec:metodologia}, organizado por trimestres,
+em um total de {\bf 24 meses}.
+%
+
+\begin{table}[!htb]
+\centering
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
+\cline{2-9}
+\multicolumn{1}{c}{} &  \multicolumn{8}{|c|}{{\bf Trimestre}} \\
+\hline
+\multicolumn{1}{|c|}{{\bf Atividade}} & 1$^o$ & 2$^o$ & 3$^o$   & 4$^o$ & 5$^o$ & 6$^o$ & 7$^o$ & 8$^o$ \\
+\hline
+1 -- Estudar estado da arte.              		& \xcol 	& \xcol 	&       	&     		&			   	&      	&  				&        \\
+\hline
+2 -- Implementar método.              			&  \xcol 	& \xcol		& \xcol   &     		&    		 	&      	&    			&         \\
+\hline
+3 -- Reduzir tempo de resposta.         			&        	& \xcol	 	& \xcol   &  \xcol  &  	      &    		&    			&        \\
+\hline
+4 -- Aumentar taxa de compressão.       				&        	&      	 	&  \xcol 	&  \xcol  &  \xcol 	&      	&       	&         \\
+\hline
+5 -- Realizar testes.                					&        	&   		 	&   \xcol &  \xcol	&  \xcol 	& \xcol	& \xcol 	&  \xcol      \\
+\hline
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\multicolumn{9}{|l|}{\bf Relatórios e publicações.} \\
+Redação de resumos e artigos.        &     			&  			  &					& 	\xcol	&  \xcol 	& \xcol & \xcol  	& \xcol \\
+\hline
+\end{tabular}
+\caption{Cronograma das principais etapas no desenvolvimento do projeto de pesquisa.}
+\label{tab:cronograma}
+\end{table}
+
+\section{Resultados Alcançados}
+
+
+O estudo relativo ao método PPM levou à publicação de três artigos científicos, detalhados abaixo:
+
+\begin{itemize}
+	\item A análise do impacto da utilização de tabelas de dispersão no uso de memória e tempo de execução do método PPM \cite{Garcia:2016}.
+	\item A investigação do comportamento do método PPM para a compressão de dados orientados a coluna \cite{Garcia2:2016}. Este trabalho recebeu a distinção de melhor artigo da trilha de pesquisa do evento em que foi publicado.
+	\item Um estudo sobre a influência de dados esparsos na taxa de compressão de bancos orientados a coluna \cite{Garcia3:2016}.
+\end{itemize}
+
+
+
+\bibliographystyle{plainnat}
+\addcontentsline{toc}{section}{Referências}
+\bibliography{projeto}
+
+\end{document}
+
