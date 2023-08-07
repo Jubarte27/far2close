@@ -30,8 +30,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Título definido aqui
-\newcommand{\titulo}{Aprimoramento dos métodos de compressão probabilísticos PPM}
-\newcommand{\engtitle}{Enhacing PPM probability based compression methods}
+\newcommand{\titulo}{Aprimoramento dos métodos de busca de dados em espaços métricos}
+\newcommand{\engtitle}{Improvement of search methods in metric spaces}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -105,7 +105,7 @@
 {
   bookmarksopen=true,
   pdftitle="\titulo",
-  pdfauthor="Sergio Luis Sardi Mergen", 
+  pdfauthor="Matheus Machado Cezar", 
   pdfsubject="\titulo", 
   pdftoolbar=false, 
   pdfmenubar=true,
@@ -129,7 +129,7 @@
 
 \title{\titulo}
 
-\author{Sérgio Luís Sardi Mergen}
+\author{Matheus Machado Cezar}
 
 % minitoc 
 %\setlength{\stcindent}{5pt}
@@ -149,16 +149,16 @@
 %\vspace{2cm}
 \vspace*{\fill}
 \noindent \Large{Projeto de Pesquisa Científica} \\
-\noindent \Large{Relatório Final} \\
+\noindent \Large{Relatório Inicial} \\
 \vspace*{\fill}
 \noindent\Huge{\bf \titulo} \\
 %\vspace{2cm}
 \vspace*{\fill}
-\noindent \Large{Sérgio Luís Sardi Mergen} \\
+\noindent \Large{Matheus Machado Cezar} \\
 %\noindent \Large{Laboratório de Sistemas de Computação} \\
 %\vfill
 \vspace*{\fill}
-\normalsize{Março de 2015}
+\normalsize{Agosto de 2023}
 \end{center}
 
 \end{titlepage}
@@ -203,7 +203,7 @@ Instituição executora: \ufsm \\
 %Edital: --- \edital \\
 
 \noindent
-Início previsto: março de 2015 \\
+Início previsto: agosto de 2022 \\
 
 \noindent
 Duração: 24 meses \\
@@ -212,52 +212,33 @@ Duração: 24 meses \\
 Pesquisadores:
 \begin{itemize}
 \item Sérgio Luís Sardi Mergen, UFSM, Coordenador
-\item Vinicius Fulber Garcia, Colaborador
+\item Matheus Machado Cezar, Colaborador
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Resumo}
 
-A compressão de dados é uma área que investiga o uso de algoritmos que são capazes de reduzir o número de bytes necessários para representar informações presentes em arquivos de dados. Diversos métodos de compressão foram propostos ao longo do tempo, como métodos puramente estatísticos (ex. Hufmann), os baseados em dicionário (ex. LZ77) e métodos probabilísticos (ex. PPM). Atualmente, os métodos usados comercialmente são baseados em dicionário. Seu uso decorre da boa taxa de compressão alcançada e do baixo tempo de processamento, tanto na compressão quanto na descompressão. Entretanto, os métodos PPM conseguem taxas de compressão melhores, ao custo de um maior tempo de processamento. Este projeto de pesquisa busca implementar o método PPM e testar variações desse método, seja pelo uso de estruturas de dados distintas ou pela adaptação na forma como a compressão é realizada. Entre os objetivos a serem alcançados está a busca de melhores tempo de resposta e maiores taxas de compressão, seja pela adaptação do método existente ou pela criação de um método novo.  
+Espaços métricos são estruturas matemáticas que generalizam a noção de distância entre elementos de um conjunto. Eles são essenciais para medir a proximidade ou similaridade entre elementos em diversos contextos. A busca por dados em espaços métricos é um problema importante e está presente em diversas aplicações, como busca por texto e reconhecimento de padrões. O projeto de pesquisa visa desenvolver um método eficiente de armazenamento e busca para dados nesse contexto, que seja capaz de lidar com diferentes métricas, distribuições e quantidade de dados.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % 2 qualificação do problema
 \section{Introdução}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+O espaço métrico é um conceito matemático que generaliza o espaço euclidiano. Sua definição é baseada em um conjunto de pontos onde a distância entre eles é determinada por uma função chamada métrica. Essa função atribui a cada par de pontos um número real não negativo. A métrica mais comum é a distância euclidiana, utilizada para medir a distância entre dois pontos em um plano cartesiano, com a fórmula $\sqrt{(p_1-q_1)^2 + (p_2-q_2)^2}$.
 
-A compressão de dados é uma área que investiga o uso de algoritmos que são capazes de representar um arquivo de dados em um outro formato que ocupe menos espaço. Essa operação é chamada de compressão. Dado o arquivo comprimido, a operação inversa é resgatar o conteúdo original. Essa operação é chamada de descompressão. 
+Existem outras métricas que podem ser usadas, como a distância de Levenshtein, que mede a distância entre duas strings, a distância de Hamming, utilizada para strings de mesmo tamanho, e a distância de Jaccard, que mede a distância entre dois conjuntos.
 
-Considerando que um arquivo é composto por símbolos, cabe a um compressor de dados reduzir o número de bits necessários para representar cada símbolo. O número de bits necessários para representar cada símbolo forma uma medida chamada de btc (bits per code). Quanto menor for, melhor é o método. Outra forma de mensurar a eficácia de um método de compressão é através da taxa de compressão. Nesse caso, quanto maior a taxa, melhor o algoritmo. 
+Quanto às estruturas de armazenamento e busca em espaços métricos, várias opções estão disponíveis, sendo as árvores as mais comuns, como a Vantage Point Tree (VPTree) e a Cover Tree. Além disso, há estruturas baseadas em grafos, como a Graph of Nearest Neighbors (GNN) e a Graph of Metric Nearest Neighbors (GMNN).
 
-Quando um método de compressão consegue recuperar todo o conteúdo original de um arquivo comprimido, diz-se que ele é um método de compressão sem perda. Esse método é indicado quando não se pode perder nenhuma parte do arquivo original. Exemplos de arquivos em que toda informação é vital são arquivos de texto. 
-
-Quando um método de compressão não consegue recuperar todo o conteúdo original de um arquivo comprimido, diz-se que ele é um método de compressão com perda. Esse método é indicado quando é tolerável perder parte do conteúdo do arquivo original se isso garante maiores taxas de compressão. Exemplos de arquivos em que parte da informação pode ser perdida são arquivos gráficos, como jpeg, em que a resolução da imagem original é sacrificada para que o arquivo ocupe menos espaço. 
-
-Nesse projeto, o foco será em métodos de compressão sem perda, especialmente aqueles que permitem boas taxas de compressão para arquivos textuais. 
-
-Diversos métodos de compressão de texto foram propostos ao longo do tempo, como detalhado a seguir.
-
-\begin{description}
-
-\item[Métodos puramente estatísticos]
-São métodos que  usam menos bits para representar símbolos que aparecem com maior freqüência dentro do arquivo. Dois dos métodos mais conhecidos de codificação estatística (ou codificação por entropia) são o Hufmann~\cite{huffman1952method} e a codificação aritmética~\cite{witten1987arithmetic}. 
-
-\item[Métodos baseados em dicionário]
-São métodos que usam os caracteres já codificados do arquivo de entrada para codificar os caracteres que ainda estão por vir. Para isso, o método verifica se uma seqüência de caracteres a codificar já ocorreu no arquivo de entrada. Em caso afirmativo, é codificado um índice que remete à posição dessa seqüência identificada. Um dos métodos de compressão baseada em dicionário mais conhecido é o LZ77~\cite{ziv1977universal}. Variações desse método deram origem a padrões (DEFLATE~\cite{salomon2004data}) e a ferramentas de compressão populares nos dias de hoje (ex. zip).
+Diversos tipos de consultas podem ser realizados em espaços métricos, incluindo a consulta por k-vizinhos mais próximos, e a consulta por vizinhos em um raio.
 
 
-\item[Métodos probabilísticos]
-Esses métodos se caracterizam por codificar a probabilidade de ocorrência de um símbolo dado um contexto. O contexto compreende os últimos símbolos que apareceram no texto antes do símbolo a ser codificado. Um símbolo especial, chamado de escape, deve ser codificado quando o símbolo a ser lido tem probabilidade de ocorrência nula~\cite{moffat1990implementing}. A probabilidade é calculada usando algum método estatístico, como codificação de Hufmann ou codificação aritmética. 
+\section{Justificativa}
 
-O conceito original deu origem a variações, e a classe de algoritmos que utiliza essa ideia passou a ser conhecida pela sigla PPM (Prediction by Partial Matching). Por exemplo, ~\citep{cleary1984data} descreve uma variação do algoritmo original que muda a probabilidade que representa o símbolo de escape.
+A busca por dados em espaços métricos é um desafio recorrente em diversas aplicações. Um exemplo prático dessa situação é a busca por texto, onde a distância de Levenshtein é útil para encontrar palavras similares à palavra buscada ou mesmo para correção de erros de digitação.
 
-Os métodos PPM se destacam por conseguir  taxas de compressão melhores do que os métodos de dicionário, especialmente em arquivos contendo texto. No entanto, o tempo de resposta tanto para a compressão quanto descompressão são relativamente altos, o que torna esses métodos de pouco valor prático.
-
-\end{description}
-
-Esse projeto de pesquisa tem por objetivo propor melhorias nos métodos PPM de modo a reduzir o tempo de processamento, além de investigar a possibilidade de obter melhores taxas de compressão. 
-
+O cerne deste projeto de pesquisa está focado na busca por dados em espaços métricos. Nossa meta é identificar uma estrutura de dados que demonstre alto desempenho nessa tarefa. Para avaliar o desempenho da estrutura de dados selecionada, serão realizados testes abrangentes, considerando métricas como tempo de resposta e custo adicional de armazenamento.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -266,31 +247,22 @@ Esse projeto de pesquisa tem por objetivo propor melhorias nos métodos PPM de m
 \label{sec:metodologia}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-Para alcançar os objetivos delineados para o projeto, uma seqüência de etapas foi elaborada. A descrição de cada uma delas virá a seguir.
+Para alcançar os objetivos delineados para o projeto, uma sequência de etapas foi elaborada. A descrição de cada uma delas virá a seguir.
 
 
 \begin{description}
 
+\item [Estudar o estado da arte:] Será realizado um levantamento de artigos e documentos que abordam os métodos de armazenamento e busca conhecidos em espaços métricos. A análise detalhada desses materiais permitirá compreender as diferenças entre os métodos existentes e como eles se complementam.
 
-	
-	\item[Estudar o estado da arte] 
-Nessa etapa serão coletados artigos e demais documentos escritos que explicam os métodos de compressão existentes. Será feito um estudo aprofundado utilizando esses documentos como forma de compreender as diferenças entre os métodos e como eles se complementam.
+\item [Implementar estrutura de dados:] Com base no estudo do estado da arte, será escolhida uma estrutura de dados adequada para a busca de dados em espaços métricos. Essa estrutura será implementada em Java, utilizando as melhores práticas de programação.
 
-  \item[Implementar  um método PPM]
-Nessa etapa será realizada uma implementação inicial de um método probabilístico que servirá como base para aprimoramentos. Uma possibilidade a ser estudada é o uso de biblioteca prontas que já implementam o método. Será utilizada a linguagem C, uma vez que a eficiência em tempo é um dos principais objetivos do projeto. 
+\item [Implementar método de armazenamento:] A estrutura de dados desenvolvida anteriormente será adaptada para possibilitar o armazenamento em memória externa. Novamente, o método escolhido será embasado no estudo do estado da arte e a implementação será feita em Java.
 
-\item[Reduzir o tempo de resposta]
-Nessa etapa serão analisadas possibilidades de modificação no algoritmo para que a compressão seja realizada em um tempo reduzido. Aspectos a investigar incluem o uso de estruturas de dados e técnicas de otimização específicas para a linguagem C.  
+\item [Reduzir tempo de resposta:] Será realizada uma análise minuciosa do método implementado, identificando pontos passíveis de otimização. Com base nessa análise, serão propostas melhorias no método para reduzir o tempo de resposta das buscas.
 
-\item[Aumentar a taxa de compressão]
-Nessa etapa serão analisadas possibilidades de modificação no algoritmo para melhorar a taxa de compressão, ou seja, fazer com que sejam usados menos bits para representar cada símbolo do arquivo de entrada. Aspectos a investigar incluem mudanças na forma com que a probabilidade dos símbolos é calculada bem como mudanças no própria lógica de funcionamento dos métodos PPM. 
+\item [Realizar testes:] Para avaliar o desempenho do método implementado, será criado um framework de testes específico para testar árvores de busca em espaço métrico. Esses testes serão conduzidos tanto com dados sintéticos quanto com dados reais, fornecendo uma avaliação abrangente da estrutura de dados desenvolvida.
 
-\item[Realizar testes]
-A realização de testes servirá para comprovar se as modificações realizadas surtiram o efeito esperado. Nessa etapa será elaborado um framework de testes que possibilite uma rápida configuração de cenários de teste e avaliação dos resultados obtidos. Além disso, nessa etapa será investigada a existência de benchmarks de teste para algoritmos de compressão. 
-
-\item[Documentação]
-Nessa etapa os resultados do projeto são documentados na forma de arquivos do latex. Em momentos oportunos o texto pode ser usado para a escrita de artigos que relatem alguma contribuição científica alcançada.
-
+\item [Documentação:] Todos os resultados obtidos ao longo do projeto serão devidamente documentados em arquivos em LaTeX. Em momentos oportunos, esses documentos poderão ser utilizados para a escrita de artigos científicos relatando as contribuições alcançadas no projeto.
 
 \end{description}
 
@@ -312,39 +284,34 @@ em um total de {\bf 24 meses}.
 \cline{2-9}
 \multicolumn{1}{c}{} &  \multicolumn{8}{|c|}{{\bf Trimestre}} \\
 \hline
-\multicolumn{1}{|c|}{{\bf Atividade}} & 1$^o$ & 2$^o$ & 3$^o$   & 4$^o$ & 5$^o$ & 6$^o$ & 7$^o$ & 8$^o$ \\
+\multicolumn{1}{|c|}{{\bf Atividade}}   & 1$^o$ & 2$^o$ & 3$^o$ & 4$^o$ & 5$^o$ & 6$^o$ & 7$^o$ & 8$^o$ \\
 \hline
-1 -- Estudar estado da arte.              		& \xcol 	& \xcol 	&       	&     		&			   	&      	&  				&        \\
+Estudar estado da arte.                 & \xcol & \xcol &       &       &       &       &       &       \\
 \hline
-2 -- Implementar método.              			&  \xcol 	& \xcol		& \xcol   &     		&    		 	&      	&    			&         \\
+Implementar estrutura                   &       & \xcol & \xcol & \xcol &       &       &       &       \\
 \hline
-3 -- Reduzir tempo de resposta.         			&        	& \xcol	 	& \xcol   &  \xcol  &  	      &    		&    			&        \\
+Implementar método de armazenamento     &       &       &       & \xcol & \xcol & \xcol &       &       \\
 \hline
-4 -- Aumentar taxa de compressão.       				&        	&      	 	&  \xcol 	&  \xcol  &  \xcol 	&      	&       	&         \\
+Reduzir tempo de resposta.              &       &       & \xcol & \xcol & \xcol & \xcol & \xcol &       \\
 \hline
-5 -- Realizar testes.                					&        	&   		 	&   \xcol &  \xcol	&  \xcol 	& \xcol	& \xcol 	&  \xcol      \\
+Realizar testes.                        &       &       & \xcol & \xcol & \xcol & \xcol & \xcol &       \\
 \hline
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%\multicolumn{9}{|l|}{\bf Relatórios e publicações.} \\
-Redação de resumos e artigos.        &     			&  			  &					& 	\xcol	&  \xcol 	& \xcol & \xcol  	& \xcol \\
+Redação de resumos e artigos.           &       &       &       & \xcol & \xcol & \xcol & \xcol & \xcol \\
 \hline
 \end{tabular}
 \caption{Cronograma das principais etapas no desenvolvimento do projeto de pesquisa.}
 \label{tab:cronograma}
 \end{table}
 
-\section{Resultados Alcançados}
+\section{Objetivos}
 
+O objetivo deste projeto de pesquisa é desenvolver um método de armazenamento e busca altamente eficiente para dados em espaços métricos. Esse método será especialmente projetado para apresentar um excelente desempenho em consultas por k-vizinhos mais próximos e consultas por vizinhos em um raio.
 
-O estudo relativo ao método PPM levou à publicação de três artigos científicos, detalhados abaixo:
+Uma característica fundamental do método é a sua capacidade de lidar com diferentes tipos de métricas, permitindo que seja aplicado em uma ampla variedade de cenários. Além disso, o método será projetado para lidar com dados de diferentes distribuições e tamanhos, garantindo que seu desempenho seja robusto e escalável.
 
-\begin{itemize}
-	\item A análise do impacto da utilização de tabelas de dispersão no uso de memória e tempo de execução do método PPM \cite{Garcia:2016}.
-	\item A investigação do comportamento do método PPM para a compressão de dados orientados a coluna \cite{Garcia2:2016}. Este trabalho recebeu a distinção de melhor artigo da trilha de pesquisa do evento em que foi publicado.
-	\item Um estudo sobre a influência de dados esparsos na taxa de compressão de bancos orientados a coluna \cite{Garcia3:2016}.
-\end{itemize}
+\section{Resultados Esperados}
 
-
+Espera-se que os resultados obtidos ao longo do projeto possibilitem a publicação de artigos científicos em periódicos e conferências de alto impacto. Esses artigos serão focados na descrição e avaliação do método de armazenamento e busca desenvolvido, bem como no framework de testes criado para avaliar árvores de busca em espaço métrico. Além disso, espera-se a disponibilização de um conjunto de dados sintéticos e reais que serão utilizados para testar e validar o método.
 
 \bibliographystyle{plainnat}
 \addcontentsline{toc}{section}{Referências}
